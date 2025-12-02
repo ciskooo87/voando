@@ -18,29 +18,34 @@ def load_image(path):
     return Image.open(full_path)
 
 # ======================================================
-# LOAD ASSETS (MAPA + AVIÃO)
+# LOAD ASSETS (MAP + PLANE)
 # ======================================================
-
-# Carrega e converte para RGB
 map_bg = load_image("data/tiles/map_base.png").convert("RGB")
+map_arr = np.array(map_bg)
 
 plane_raw = load_image("assets/plane2.png").convert("RGB")
 
-# 🔥 Redimensiona o avião para tamanho fixo controlado
+# 🔥 Resize airplane
 PLANE_SIZE = 64
 plane = plane_raw.resize((PLANE_SIZE, PLANE_SIZE))
 plane_arr = np.array(plane)
 pw, ph = PLANE_SIZE, PLANE_SIZE
 
 # ======================================================
-# GAME STATE (SESSION)
+# GAME STATE
 # ======================================================
-if "x" not in st.session_state:
-    st.session_state.x = 400
-if "y" not in st.session_state:
-    st.session_state.y = 300
+if "offset_x" not in st.session_state:
+    st.session_state.offset_x = 0
+
+if "offset_y" not in st.session_state:
+    st.session_state.offset_y = 0
+
 if "speed" not in st.session_state:
-    st.session_state.speed = 5
+    st.session_state.speed = 10
+
+# Canvas de visualização
+VIEW_W = 900
+VIEW_H = 600
 
 # ======================================================
 # LAYOUT
@@ -48,7 +53,7 @@ if "speed" not in st.session_state:
 col1, col2 = st.columns([1, 4])
 
 # ======================================================
-# CONTROLES DO AVIÃO
+# CONTROLES
 # ======================================================
 with col1:
     st.markdown("### 🕹️ Controles")
@@ -60,48 +65,48 @@ with col1:
         st.session_state.speed = max(1, st.session_state.speed - 1)
 
     if st.button("Esquerda ⬅️"):
-        st.session_state.x -= st.session_state.speed
+        st.session_state.offset_x -= st.session_state.speed * -1
 
     if st.button("Direita ➡️"):
-        st.session_state.x += st.session_state.speed
+        st.session_state.offset_x += st.session_state.speed * -1
 
     if st.button("Frente ↑"):
-        st.session_state.y -= st.session_state.speed
+        st.session_state.offset_y += st.session_state.speed * -1
 
     if st.button("Trás ↓"):
-        st.session_state.y += st.session_state.speed
+        st.session_state.offset_y -= st.session_state.speed * -1
 
 # ======================================================
-# TELA DO JOGO
+# CAMERA TRACKING (MAPA SCROLL)
 # ======================================================
 with col2:
+    st.markdown("## 🛫 FlightBuilder2D – Mapa com Scroll Dinâmico")
 
-    st.markdown("## 🛫 FlightBuilder2D – MVP Jogável")
+    ox = int(st.session_state.offset_x)
+    oy = int(st.session_state.offset_y)
 
-    # Mapa como matriz
-    canvas = np.array(map_bg).copy()
+    # 🔥 Proteger limites do mundo
+    ox = max(0, min(ox, map_arr.shape[1] - VIEW_W))
+    oy = max(0, min(oy, map_arr.shape[0] - VIEW_H))
 
-    px = int(st.session_state.x)
-    py = int(st.session_state.y)
+    st.session_state.offset_x = ox
+    st.session_state.offset_y = oy
 
-    H, W, _ = canvas.shape
+    # 🔥 Recorte do mapa (camera view)
+    view = map_arr[oy:oy+VIEW_H, ox:ox+VIEW_W].copy()
 
-    # Proteção de borda TOTAL
-    px = max(0, min(px, W - pw))
-    py = max(0, min(py, H - ph))
+    # 🔥 Avião sempre no centro
+    plane_x = VIEW_W // 2 - pw // 2
+    plane_y = VIEW_H // 2 - ph // 2
 
-    st.session_state.x = px
-    st.session_state.y = py
+    view[plane_y:plane_y+ph, plane_x:plane_x+pw] = plane_arr
 
-    # Render seguro do avião
-    canvas[py:py+ph, px:px+pw] = plane_arr
-
-    # Exibe
-    st.image(canvas, use_column_width=True)
+    st.image(view, use_column_width=True)
 
 # ======================================================
-# PAINEL
+# HUD
 # ======================================================
 st.markdown("---")
 st.write(f"Velocidade: **{st.session_state.speed} nós**")
-st.write(f"Posição: **X = {st.session_state.x} | Y = {st.session_state.y}**")
+st.write(f"Offset X: **{st.session_state.offset_x}**")
+st.write(f"Offset Y: **{st.session_state.offset_y}**")
