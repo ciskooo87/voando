@@ -16,6 +16,9 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 # ======================================================
 def load_image(path):
     full_path = os.path.join(BASE_DIR, path)
+    if not os.path.exists(full_path):
+        st.error(f"❌ Arquivo não encontrado: {full_path}")
+        st.stop()
     return Image.open(full_path)
 
 plane = load_image("assets/plane.png")
@@ -60,7 +63,6 @@ with col1:
     if st.button("Trás ↓"):
         st.session_state.y += st.session_state.speed
 
-
 # ======================================================
 # TELA DO JOGO
 # ======================================================
@@ -68,24 +70,25 @@ with col2:
     st.markdown("## 🛫 FlightBuilder2D – MVP Jogável")
 
     canvas = np.array(map_bg).copy()
-    
-    px, py = st.session_state.x, st.session_state.y
+
+    px = st.session_state.x
+    py = st.session_state.y
     pw, ph = plane.size
 
-    # Proteção de borda
-   # Limitar X e Y dentro do mapa
-px = max(0, min(px, canvas.shape[1] - pw))
-py = max(0, min(py, canvas.shape[0] - ph))
+    # ======================================================
+    # PROTEÇÃO DE BORDA – ANTI VALUEERROR
+    # ======================================================
+    px = max(0, min(px, canvas.shape[1] - pw))
+    py = max(0, min(py, canvas.shape[0] - ph))
 
-# Atualiza no session_state
-st.session_state.x = px
-st.session_state.y = py
+    st.session_state.x = px
+    st.session_state.y = py
 
-# Renderiza o avião
-plane_arr = np.array(plane)
+    # Render do avião
+    plane_arr = np.array(plane)
+    canvas[py:py+ph, px:px+pw] = plane_arr
 
-canvas[py:py+ph, px:px+pw] = plane_arr
-
+    st.image(canvas, use_column_width=True)
 
 # ======================================================
 # PAINEL
