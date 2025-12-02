@@ -21,7 +21,7 @@ def load_image(path):
         st.stop()
     return Image.open(full_path)
 
-plane = load_image("assets/plane.png")
+plane = load_image("assets/plane2.png")
 map_bg = load_image("data/tiles/map_base.png")
 
 # ======================================================
