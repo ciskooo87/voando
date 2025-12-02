@@ -1,1 +1,86 @@
+iata,icao,name,city,country,lat,lon
+GRU,SBGR,São Paulo/Guarulhos Intl,São Paulo,Brazil,-23.4356,-46.4731
+CGH,SBSP,Congonhas,São Paulo,Brazil,-23.6267,-46.6554
+VCP,SBKP,Viracopos,Campinas,Brazil,-23.0074,-47.1345
+GIG,SBGL,Rio Galeão,Rio de Janeiro,Brazil,-22.8090,-43.2506
+SDU,SBRJ,Santos Dumont,Rio de Janeiro,Brazil,-22.9105,-43.1631
+BSB,SBBR,Brasília Intl,Brasília,Brazil,-15.8711,-47.9186
+CWB,SBCT,Afonso Pena,Curitiba,Brazil,-25.5285,-49.1758
+POA,SBPA,Salgado Filho,Porto Alegre,Brazil,-29.9944,-51.1714
+SSA,SBSV,Luis Eduardo Magalhães,Salvador,Brazil,-12.9086,-38.3225
+REC,SBRF,Guararapes,Recife,Brazil,-8.1265,-34.9230
+BEL,SBBE,Val-de-Cans,Belém,Brazil,-1.3793,-48.4763
+SLZ,SBSL,Marechal Cunha Machado,São Luís,Brazil,-2.5854,-44.2341
+FOR,SBFZ,Pinto Martins,Fortaleza,Brazil,-3.7763,-38.5320
+NAT,SBNT,Aloísio Alves,Natal,Brazil,-5.7681,-35.3763
+MCZ,SBMO,Zumbi dos Palmares,Maceió,Brazil,-9.5108,-35.7917
+JPA,SBJP,Presidente Castro Pinto,João Pessoa,Brazil,-7.1458,-34.9486
+CGB,SBCY,Marechal Rondon,Cuiabá,Brazil,-15.6514,-56.1167
+VIX,SBVT,Eurico de Aguiar Salles,Vitória,Brazil,-20.2581,-40.2864
+MAO,SBEG,Eduardo Gomes,Manaus,Brazil,-3.0386,-60.0497
+THE,SBTE,Senador Petrônio Portella,Teresina,Brazil,-5.0603,-42.8234
+CNF,SBCF,Confins,Belo Horizonte,Brazil,-19.6244,-43.9719
+PLU,SBBH,Pampulha,Belo Horizonte,Brazil,-19.8512,-43.9506
+FLN,SBFL,Hercílio Luz,Florianópolis,Brazil,-27.6706,-48.5467
+IGU,SBFI,Cataratas,Foz do Iguaçu,Brazil,-25.5992,-54.4850
+MCO,KMCO,Orlando Intl,Orlando,USA,28.4312,-81.3081
+JFK,KJFK,John F Kennedy Intl,New York,USA,40.6413,-73.7781
+LGA,KLGA,LaGuardia,New York,USA,40.7769,-73.8740
+EWR,KEWR,Newark Intl,Newark,USA,40.6895,-74.1745
+LAX,KLAX,Los Angeles Intl,Los Angeles,USA,33.9416,-118.4085
+SFO,KSFO,San Francisco Intl,San Francisco,USA,37.6213,-122.3790
+SEA,KSEA,Seattle Tacoma Intl,Seattle,USA,47.4502,-122.3088
+MIA,KMIA,Miami Intl,Miami,USA,25.7959,-80.2871
+DFW,KDFW,Dallas/Fort Worth Intl,Dallas,USA,32.8998,-97.0403
+DEN,KDEN,Denver Intl,Denver,USA,39.8561,-104.6737
+ORD,KORD,O'Hare Intl,Chicago,USA,41.9742,-87.9073
+IAH,KIAH,George Bush Intercontinental,Houston,USA,29.9902,-95.3368
+ATL,KATL,Hartsfield Jackson Intl,Atlanta,USA,33.6407,-84.4277
+BOS,KBOS,Logan Intl,Boston,USA,42.3656,-71.0096
+LAS,KLAS,Harry Reid Intl,Las Vegas,USA,36.0840,-115.1537
+YVR,CYVR,Vancouver Intl,Vancouver,Canada,49.1950,-123.1800
+YYZ,CYYZ,Toronto Pearson Intl,Toronto,Canada,43.6777,-79.6248
+YUL,CYUL,Montreal Trudeau Intl,Montreal,Canada,45.4706,-73.7408
+LHR,EGLL,London Heathrow,London,UK,51.4700,-0.4543
+LGW,EGKK,London Gatwick,London,UK,51.1537,-0.1821
+MAN,EGCC,Manchester Intl,Manchester,UK,53.3537,-2.2750
+CDG,LFPG,Paris Charles de Gaulle,Paris,France,49.0097,2.5479
+ORY,LFPO,Paris Orly,Paris,France,48.7262,2.3652
+FRA,EDDF,Frankfurt am Main,Frankfurt,Germany,50.0379,8.5622
+MUC,EDDM,Munich Intl,Munich,Germany,48.3538,11.7861
+AMS,EHAM,Amsterdam Schiphol,Amsterdam,Netherlands,52.3105,4.7683
+MAD,LEMD,Madrid Barajas,Madrid,Spain,40.4983,-3.5676
+BCN,LEBL,Barcelona El Prat,Barcelona,Spain,41.2974,2.0833
+FCO,LIRF,Rome Fiumicino,Rome,Italy,41.8003,12.2389
+MXP,LIMC,Milan Malpensa,Milan,Italy,45.6306,8.7281
+ZRH,LSZH,Zurich Intl,Zurich,Switzerland,47.4581,8.5555
+GVA,LSGG,Geneva Intl,Geneva,Switzerland,46.2381,6.1090
+VIE,LOWW,Vienna Intl,Vienna,Austria,48.1103,16.5697
+SVO,UUEE,Moscow Sheremetyevo,Moscow,Russia,55.9726,37.4146
+IST,LTBA,Atatürk Intl,Istanbul,Turkey,40.9769,28.8146
+DXB,OMDB,Dubai Intl,Dubai,UAE,25.2532,55.3657
+AUH,OMAA,Abu Dhabi Intl,Abu Dhabi,UAE,24.4539,54.3773
+SIN,WSSS,Singapore Changi,Singapore,Singapore,1.3644,103.9915
+HKG,VHHH,Hong Kong Intl,Hong Kong,China,22.3080,113.9185
+PEK,ZBAA,Beijing Capital Intl,Beijing,China,40.0801,116.5846
+PVG,ZSPD,Shanghai Pudong,Shanghai,China,31.1443,121.8083
+NRT,RJAA,Narita Intl,Tokyo,Japan,35.7732,140.3874
+HND,RJTT,Haneda Intl,Tokyo,Japan,35.5494,139.7798
+ICN,RKSI,Incheon Intl,Seoul,South Korea,37.4602,126.4407
+SYD,YSSY,Sydney Kingsford Smith,Sydney,Australia,-33.9399,151.1753
+MEL,YMML,Melbourne Intl,Melbourne,Australia,-37.6733,144.8430
+AKL,NZAA,Auckland Intl,Auckland,New Zealand,-37.0082,174.7850
+SCL,SCEL,Santiago Intl,Santiago,Chile,-33.3929,-70.7858
+EZE,SAEZ,Ezeiza Intl,Buenos Aires,Argentina,-34.8222,-58.5358
+MVD,SUMU,Carrasco Intl,Montevideo,Uruguay,-34.8384,-56.0308
+LIM,SPJC,Jorge Chavez Intl,Lima,Peru,-12.0219,-77.1143
+BOG,SKBO,El Dorado Intl,Bogotá,Colombia,4.7016,-74.1469
+MEX,MMMX,Benito Juárez Intl,Mexico City,Mexico,19.4361,-99.0719
+CUN,MMUN,Cancún Intl,Cancún,Mexico,21.0365,-86.8769
+PTY,MPTO,Tocumen Intl,Panama City,Panama,9.0714,-79.3835
+SJO,MROC,Juan Santamaría Intl,San José,Costa Rica,9.9982,-84.2041
+JNB,FAOR,Johannesburg OR Tambo,Johannesburg,South Africa,-26.1337,28.2420
+CPT,FACT,Cape Town Intl,Cape Town,South Africa,-33.9689,18.6017
+CAI,HECA,Cairo Intl,Cairo,Egypt,30.1219,31.4056
+ADD,HAAB,Addis Ababa Bole,Addis Ababa,Ethiopia,8.9779,38.7993
 
