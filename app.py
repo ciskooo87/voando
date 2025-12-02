@@ -73,10 +73,19 @@ with col2:
     pw, ph = plane.size
 
     # Proteção de borda
-    if 0 <= px <= canvas.shape[1] - pw and 0 <= py <= canvas.shape[0] - ph:
-        canvas[py:py+ph, px:px+pw] = np.array(plane)
+   # Limitar X e Y dentro do mapa
+px = max(0, min(px, canvas.shape[1] - pw))
+py = max(0, min(py, canvas.shape[0] - ph))
 
-    st.image(canvas, use_column_width=True)
+# Atualiza no session_state
+st.session_state.x = px
+st.session_state.y = py
+
+# Renderiza o avião
+plane_arr = np.array(plane)
+
+canvas[py:py+ph, px:px+pw] = plane_arr
+
 
 # ======================================================
 # PAINEL
