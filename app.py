@@ -3,6 +3,9 @@ from PIL import Image
 import numpy as np
 import os
 
+# ======================================================
+# CONFIG STREAMLIT
+# ======================================================
 st.set_page_config(layout="wide")
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -10,20 +13,27 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 def load_image(path):
     full_path = os.path.join(BASE_DIR, path)
     if not os.path.exists(full_path):
-        st.error(f"❌ Arquivo não encontrado: " + full_path)
+        st.error(f"❌ Arquivo não encontrado: {full_path}")
         st.stop()
     return Image.open(full_path)
 
 # ======================================================
-# LOAD ASSETS (CONVERT TO RGB)
+# LOAD ASSETS (MAPA + AVIÃO)
 # ======================================================
-plane = load_image("assets/plane2.png").convert("RGB")
+
+# Carrega e converte para RGB
 map_bg = load_image("data/tiles/map_base.png").convert("RGB")
 
-map_arr_base = np.array(map_bg)  # canvas base
+plane_raw = load_image("assets/plane2.png").convert("RGB")
+
+# 🔥 Redimensiona o avião para tamanho fixo controlado
+PLANE_SIZE = 64
+plane = plane_raw.resize((PLANE_SIZE, PLANE_SIZE))
+plane_arr = np.array(plane)
+pw, ph = PLANE_SIZE, PLANE_SIZE
 
 # ======================================================
-# GAME STATE
+# GAME STATE (SESSION)
 # ======================================================
 if "x" not in st.session_state:
     st.session_state.x = 400
@@ -32,10 +42,13 @@ if "y" not in st.session_state:
 if "speed" not in st.session_state:
     st.session_state.speed = 5
 
+# ======================================================
+# LAYOUT
+# ======================================================
 col1, col2 = st.columns([1, 4])
 
 # ======================================================
-# CONTROLES
+# CONTROLES DO AVIÃO
 # ======================================================
 with col1:
     st.markdown("### 🕹️ Controles")
@@ -65,28 +78,25 @@ with col2:
 
     st.markdown("## 🛫 FlightBuilder2D – MVP Jogável")
 
-    canvas = map_arr_base.copy()
+    # Mapa como matriz
+    canvas = np.array(map_bg).copy()
 
     px = int(st.session_state.x)
     py = int(st.session_state.y)
 
-    pw, ph = plane.size
-
     H, W, _ = canvas.shape
 
-    # Proteção de borda
+    # Proteção de borda TOTAL
     px = max(0, min(px, W - pw))
     py = max(0, min(py, H - ph))
 
     st.session_state.x = px
     st.session_state.y = py
 
-    # AVIÃO EM RGB → ARRAY
-    plane_arr = np.array(plane)
-
-    # Inserção segura
+    # Render seguro do avião
     canvas[py:py+ph, px:px+pw] = plane_arr
 
+    # Exibe
     st.image(canvas, use_column_width=True)
 
 # ======================================================
