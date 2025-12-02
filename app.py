@@ -1,61 +1,86 @@
 import streamlit as st
 from PIL import Image
 import numpy as np
+import os
 
+# ======================================================
+# CONFIG STREAMLIT
+# ======================================================
 st.set_page_config(layout="wide")
+
+# BASE DIR PARA CORRIGIR PATHS NO STREAMLIT CLOUD
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # ======================================================
 # LOAD ASSETS
 # ======================================================
-plane = Image.open("assets/plane.png")
-map_bg = Image.open("data/tiles/map_base.png")
+def load_image(path):
+    full_path = os.path.join(BASE_DIR, path)
+    return Image.open(full_path)
 
-# Posição inicial
+plane = load_image("assets/plane.png")
+map_bg = load_image("data/tiles/map_base.png")
+
+# ======================================================
+# GAME STATE (SESSION)
+# ======================================================
 if "x" not in st.session_state:
     st.session_state.x = 400
+if "y" not in st.session_state:
     st.session_state.y = 300
+if "speed" not in st.session_state:
     st.session_state.speed = 5
+
+# ======================================================
+# LAYOUT
+# ======================================================
+col1, col2 = st.columns([1, 4])
 
 # ======================================================
 # CONTROLES DO AVIÃO
 # ======================================================
-col1, col2 = st.columns([1, 4])
-
 with col1:
-    st.markdown("### Controles")
-    
-    if st.button("⬆️ Acelerar"):
+    st.markdown("### 🕹️ Controles")
+
+    if st.button("Acelerar ⬆️"):
         st.session_state.speed += 1
 
-    if st.button("⬇️ Desacelerar"):
+    if st.button("Desacelerar ⬇️"):
         st.session_state.speed = max(1, st.session_state.speed - 1)
 
-    if st.button("⬅️ Esquerda"):
+    if st.button("Esquerda ⬅️"):
         st.session_state.x -= st.session_state.speed
 
-    if st.button("➡️ Direita"):
+    if st.button("Direita ➡️"):
         st.session_state.x += st.session_state.speed
 
-    if st.button("⬆️ Frente"):
+    if st.button("Frente ↑"):
         st.session_state.y -= st.session_state.speed
 
-    if st.button("⬇️ Trás"):
+    if st.button("Trás ↓"):
         st.session_state.y += st.session_state.speed
 
-with col2:
-    st.markdown("## 🛫 FlightBuilder2D – MVP")
-    canvas = np.array(map_bg).copy()
 
-    # Colocar avião no mapa
+# ======================================================
+# TELA DO JOGO
+# ======================================================
+with col2:
+    st.markdown("## 🛫 FlightBuilder2D – MVP Jogável")
+
+    canvas = np.array(map_bg).copy()
+    
     px, py = st.session_state.x, st.session_state.y
     pw, ph = plane.size
 
-    # Render plane
-    canvas[py:py+ph, px:px+pw] = np.array(plane)
+    # Proteção de borda
+    if 0 <= px <= canvas.shape[1] - pw and 0 <= py <= canvas.shape[0] - ph:
+        canvas[py:py+ph, px:px+pw] = np.array(plane)
 
     st.image(canvas, use_column_width=True)
 
-# Painel do avião
+# ======================================================
+# PAINEL
+# ======================================================
 st.markdown("---")
-st.markdown(f"**Velocidade:** {st.session_state.speed} nós")
-st.markdown(f"**Posição:** X={st.session_state.x}, Y={st.session_state.y}")
+st.write(f"Velocidade: **{st.session_state.speed} nós**")
+st.write(f"Posição: **X = {st.session_state.x} | Y = {st.session_state.y}**")
